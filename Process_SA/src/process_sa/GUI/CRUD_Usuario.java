@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import process_sa.controller.Controlador;
 import process_sa.controller.Md5hash;
+import process_sa.models.Permiso;
 import process_sa.models.Persona;
 import process_sa.models.Usuario;
 
@@ -21,6 +22,7 @@ import process_sa.models.Usuario;
  */
 public class CRUD_Usuario extends javax.swing.JFrame {
     DefaultTableModel model;
+    DefaultTableModel model1;
     /**
      * Creates new form CRUD_Usuario
      */
@@ -38,8 +40,18 @@ public class CRUD_Usuario extends javax.swing.JFrame {
             }
         };
         tblPersonas.setModel(model);
+        
+        String[] titulos1 = {"id","tipo_permiso","descripción"};
+        model1 = new DefaultTableModel(null, titulos1){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        tblPermisos.setModel(model1);
         llenarComboBoxRol();
         mostrarDatos();
+        mostrarDatos1();
     }
 
     /**
@@ -68,11 +80,16 @@ public class CRUD_Usuario extends javax.swing.JFrame {
         showPassword = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtIdPermiso = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPersonas = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        lblPersona = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPermisos = new javax.swing.JTable();
+        lblPermisos = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mainMenu = new javax.swing.JMenu();
         menuInicio = new javax.swing.JMenuItem();
@@ -150,6 +167,20 @@ public class CRUD_Usuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("ID Permiso:");
+
+        txtIdPermiso.setEditable(false);
+        txtIdPermiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdPermisoActionPerformed(evt);
+            }
+        });
+        txtIdPermiso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdPermisoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -160,25 +191,32 @@ public class CRUD_Usuario extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblRol)
-                                    .addComponent(lblUsuario)
-                                    .addComponent(lblId)
-                                    .addComponent(lblPassword))
-                                .addGap(20, 20, 20))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblRol)
+                                            .addComponent(lblUsuario)
+                                            .addComponent(lblId)
+                                            .addComponent(lblPassword))
+                                        .addGap(20, 20, 20))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtUsuario)
+                                            .addComponent(txtPassword)
+                                            .addComponent(txtIdPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cboxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(showPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtUsuario)
-                                    .addComponent(txtPassword)
-                                    .addComponent(txtIdPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(showPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtIdPermiso, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -216,7 +254,11 @@ public class CRUD_Usuario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtIdPermiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear)
                     .addComponent(btnEditar)
@@ -225,7 +267,7 @@ public class CRUD_Usuario extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 340, 250));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 340, 290));
 
         jLabel5.setText("CRUD Usuario");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
@@ -248,32 +290,65 @@ public class CRUD_Usuario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPersonas);
 
-        jLabel1.setText("Persona");
+        lblPersona.setText("Persona");
+
+        tblPermisos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblPermisos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPermisosMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblPermisos);
+
+        lblPermisos.setText("Permisos");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(10, 10, 10)
+                        .addComponent(lblPermisos)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(lblPersona)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(13, 13, 13)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                .addComponent(lblPersona)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPermisos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 330, 240));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 330, 300));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 300));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 330));
 
         mainMenu.setText("Menú");
 
@@ -355,7 +430,7 @@ public class CRUD_Usuario extends javax.swing.JFrame {
         
         try {
             Usuario user = recuperarDatosGUI();
-            if (user.getNombre_usuario().length() == 0 || user.getContraseña().length() == 0 || user.getId_rol() == 0 || user.getId_persona() == 0 || cboxRol.getSelectedIndex() == 0){
+            if (user.getNombre_usuario().length() == 0 || user.getContraseña().length() == 0 || user.getId_rol() == 0 || user.getId_persona() == 0 || user.getId_permiso() == 0 || cboxRol.getSelectedIndex() == 0){
                 JOptionPane.showMessageDialog(this, "Debe llenar todos los campos requeridos");
             }
             else if (user.getNombre_usuario().length() >= 5){
@@ -366,7 +441,7 @@ public class CRUD_Usuario extends javax.swing.JFrame {
                 
                 System.out.println("Bytes to hex: "+cipheredPassword);
 
-                String sentencia = String.format("call PD_INSERT_USUARIO('%s', '%s', %s, %s)", user.getNombre_usuario(), cipheredPassword, user.getId_rol(), user.getId_persona());
+                String sentencia = String.format("call PD_INSERT_USUARIO('%s', '%s', %s, %s, %s)", user.getNombre_usuario(), cipheredPassword, user.getId_rol(), user.getId_persona(), user.getId_permiso());
                 System.out.println("Sentencia: "+sentencia);
                 conn.ejecutarProcedimientoAlmacenado(sentencia);
                 JOptionPane.showMessageDialog(this, "Usuario creado correctamente!");
@@ -462,6 +537,31 @@ public class CRUD_Usuario extends javax.swing.JFrame {
     private void cboxRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxRolActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboxRolActionPerformed
+
+    private void tblPermisosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPermisosMouseClicked
+        // TODO add your handling code here:
+        JTable dt = (JTable)evt.getSource();
+        int row  = dt.getSelectedRow();
+        
+        String valor = dt.getValueAt(row, 0).toString();
+        
+        txtIdPermiso.setText(valor);
+    }//GEN-LAST:event_tblPermisosMouseClicked
+
+    private void txtIdPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPermisoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdPermisoActionPerformed
+
+    private void txtIdPermisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdPermisoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c==KeyEvent.VK_BACK_SPACE) || c==KeyEvent.VK_DELETE)){
+            evt.consume();
+        }
+        if((txtIdPermiso.getText().length() >= 4)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIdPermisoKeyTyped
     
     public void llenarComboBoxRol(){
         Controlador conn = new Controlador();
@@ -501,6 +601,26 @@ public class CRUD_Usuario extends javax.swing.JFrame {
         conn.desconectar();
     }
     
+    public void mostrarDatos1(){
+        Controlador conn = new Controlador();
+        
+        try {
+            final List<Permiso> listaPermiso = conn.getPermisos();
+            if (listaPermiso != null){
+                for (Permiso listaPermisos : listaPermiso) {
+                    Object[] o = new Object[3];
+                    o[0] = listaPermisos.getId();
+                    o[1] = listaPermisos.getTipo_permiso();
+                    o[2] = listaPermisos.getDescripcion();
+                    model1.addRow(o);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error: "+e);
+        }
+        conn.desconectar();
+    }
+    
     public Usuario recuperarDatosGUI(){
         Usuario user = new Usuario();
         
@@ -524,6 +644,12 @@ public class CRUD_Usuario extends javax.swing.JFrame {
         else{
             user.setId_persona(0);
         }
+        if(txtIdPermiso.getText().length() > 0){
+            user.setId_permiso(Integer.parseInt(txtIdPermiso.getText()));
+        }
+        else{
+            user.setId_permiso(0);
+        }
         
         return user;
     }
@@ -533,6 +659,8 @@ public class CRUD_Usuario extends javax.swing.JFrame {
         txtUsuario.setText(null);
         txtPassword.setText(null);
         cboxRol.setSelectedIndex(0);
+        txtIdPersona.setText(null);
+        txtIdPermiso.setText(null);
     }
     
     public static void main(String args[]) {
@@ -576,16 +704,19 @@ public class CRUD_Usuario extends javax.swing.JFrame {
     private javax.swing.JMenuItem crudPersona;
     private javax.swing.JMenuItem crudRol;
     private javax.swing.JMenuItem crudUsuario;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblPermisos;
+    private javax.swing.JLabel lblPersona;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JMenuItem logout;
@@ -594,8 +725,10 @@ public class CRUD_Usuario extends javax.swing.JFrame {
     private javax.swing.JMenu personaMenu;
     private javax.swing.JMenu rolMenu;
     private javax.swing.JToggleButton showPassword;
+    private javax.swing.JTable tblPermisos;
     private javax.swing.JTable tblPersonas;
     private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtIdPermiso;
     private javax.swing.JTextField txtIdPersona;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
