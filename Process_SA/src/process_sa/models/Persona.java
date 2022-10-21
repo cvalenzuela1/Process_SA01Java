@@ -15,10 +15,19 @@ public class Persona {
     String nombre;
     String apellido_paterno;
     String apellido_materno;
+    String email;
     int id_direccion;
     int id_region;
     int id_ciudad;
     int id_comuna;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public int getId() {
         return id;

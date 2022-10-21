@@ -8,6 +8,7 @@ package process_sa.GUI;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import process_sa.controller.Controlador;
 import process_sa.models.Persona;
@@ -68,6 +69,8 @@ public class CRUD_Persona extends javax.swing.JFrame {
         cboxRegion = new javax.swing.JComboBox<>();
         cboxCiudad = new javax.swing.JComboBox<>();
         txtDireccion = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mainMenu = new javax.swing.JMenu();
@@ -125,15 +128,15 @@ public class CRUD_Persona extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnCrear);
-        btnCrear.setBounds(10, 330, 79, 23);
+        btnCrear.setBounds(10, 360, 79, 23);
 
         btnEditar.setText("Editar");
         jPanel2.add(btnEditar);
-        btnEditar.setBounds(110, 330, 79, 23);
+        btnEditar.setBounds(110, 360, 79, 23);
 
         btnEliminar.setText("Eliminar");
         jPanel2.add(btnEliminar);
-        btnEliminar.setBounds(200, 330, 79, 23);
+        btnEliminar.setBounds(200, 360, 79, 23);
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +145,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnLimpiar);
-        btnLimpiar.setBounds(300, 330, 77, 23);
+        btnLimpiar.setBounds(300, 360, 77, 23);
 
         jLabel1.setText("Apellido paterno:");
         jPanel2.add(jLabel1);
@@ -150,7 +153,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
 
         jLabel2.setText("Región:");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(59, 206, 70, 14);
+        jLabel2.setBounds(60, 240, 70, 14);
 
         txtNombre.setPreferredSize(new java.awt.Dimension(7, 27));
         jPanel2.add(txtNombre);
@@ -179,20 +182,20 @@ public class CRUD_Persona extends javax.swing.JFrame {
 
         jLabel6.setText("Dirección:");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(50, 175, 70, 14);
+        jLabel6.setBounds(50, 210, 70, 14);
 
         cboxComuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "------------------------------" }));
         cboxComuna.setPreferredSize(new java.awt.Dimension(57, 18));
         jPanel2.add(cboxComuna);
-        cboxComuna.setBounds(110, 260, 220, 30);
+        cboxComuna.setBounds(110, 290, 220, 30);
 
         jLabel7.setText("Ciudad:");
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(59, 240, 70, 14);
+        jLabel7.setBounds(60, 270, 70, 14);
 
         jLabel8.setText("Comuna:");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(53, 270, 70, 14);
+        jLabel8.setBounds(60, 300, 70, 14);
 
         txtDireccionNumero.setPreferredSize(new java.awt.Dimension(7, 27));
         txtDireccionNumero.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -201,28 +204,36 @@ public class CRUD_Persona extends javax.swing.JFrame {
             }
         });
         jPanel2.add(txtDireccionNumero);
-        txtDireccionNumero.setBounds(260, 170, 78, 27);
+        txtDireccionNumero.setBounds(260, 200, 78, 27);
 
         cboxRegion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "------------------------------" }));
         cboxRegion.setPreferredSize(new java.awt.Dimension(57, 18));
         jPanel2.add(cboxRegion);
-        cboxRegion.setBounds(110, 200, 220, 30);
+        cboxRegion.setBounds(110, 230, 220, 30);
 
         cboxCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "------------------------------" }));
         cboxCiudad.setPreferredSize(new java.awt.Dimension(57, 18));
         jPanel2.add(cboxCiudad);
-        cboxCiudad.setBounds(110, 230, 220, 30);
+        cboxCiudad.setBounds(110, 260, 220, 30);
 
         txtDireccion.setPreferredSize(new java.awt.Dimension(7, 27));
         jPanel2.add(txtDireccion);
-        txtDireccion.setBounds(110, 170, 140, 27);
+        txtDireccion.setBounds(110, 200, 140, 27);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 380, 360));
+        txtEmail.setPreferredSize(new java.awt.Dimension(7, 27));
+        jPanel2.add(txtEmail);
+        txtEmail.setBounds(110, 170, 228, 27);
+
+        jLabel9.setText("Email:");
+        jPanel2.add(jLabel9);
+        jLabel9.setBounds(60, 180, 50, 14);
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 380, 420));
 
         jLabel5.setText("CRUD Persona");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 400));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 460));
 
         mainMenu.setText("Menú");
 
@@ -306,14 +317,19 @@ public class CRUD_Persona extends javax.swing.JFrame {
         
         try {
             if (persona.getRut().length() == 0 || persona.getNombre().length() == 0 || persona.getApellido_paterno().length() == 0 || persona.getApellido_materno().length() == 0
-                    || persona.getId_region() == 0 || persona.getId_direccion() == 0 || persona.getId_ciudad() == 0 || persona.getId_comuna() == 0){
+                    || persona.getId_region() == 0 || persona.getId_direccion() == 0 || persona.getId_ciudad() == 0 || persona.getId_comuna() == 0 || persona.getEmail().length() == 0){
                 JOptionPane.showMessageDialog(this, "Debe llenar todos los campos requeridos");
             }
             else{
-                String sentencia = String.format("call PD_INSERT_PERSONA('%s', '%s', '%s', '%s', %s)", persona.getRut(), persona.getNombre(), persona.getApellido_paterno(), persona.getApellido_materno(), persona.getId_direccion());
-                System.out.println("Sentencia: "+sentencia);
-                conn.ejecutarProcedimientoAlmacenado(sentencia);
-                JOptionPane.showMessageDialog(this, "Persona creada correctamente!");
+                if (!(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", persona.getEmail()))){
+                    JOptionPane.showMessageDialog(this, "Por favor, ingresa un email válido", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    String sentencia = String.format("call PD_INSERT_PERSONA('%s', '%s', '%s', '%s', '%s', %s)", persona.getRut(), persona.getNombre(), persona.getApellido_paterno(), persona.getApellido_materno(), persona.getEmail(), persona.getId_direccion());
+                    System.out.println("Sentencia: "+sentencia);
+                    conn.ejecutarProcedimientoAlmacenado(sentencia);
+                    JOptionPane.showMessageDialog(this, "Persona creada correctamente!");
+                }
             }
         } 
         catch (Exception e) {
@@ -445,6 +461,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
         persona.setNombre(txtNombre.getText());   
         persona.setApellido_paterno(txtAppaterno.getText());
         persona.setApellido_materno(txtApmaterno.getText());
+        persona.setEmail(txtEmail.getText());
         if (cboxComuna.getSelectedIndex() > 0){
             persona.setId_direccion(getDireccionId(txtDireccion.getText(), txtDireccionNumero.getText(), Integer.parseInt(String.valueOf(cboxComuna.getSelectedItem().toString().charAt(0)))));
             persona.setId_comuna(Integer.parseInt(String.valueOf(cboxComuna.getSelectedItem().toString().charAt(0))));
@@ -486,39 +503,12 @@ public class CRUD_Persona extends javax.swing.JFrame {
         txtNombre.setText(null);
         txtAppaterno.setText(null);
         txtApmaterno.setText(null);
+        txtEmail.setText(null);
         txtDireccion.setText(null);
         txtDireccionNumero.setText(null);
         cboxRegion.setSelectedIndex(0);
         cboxCiudad.setSelectedIndex(0);
         cboxComuna.setSelectedIndex(0);
-    }
-    
-    public String randomAlphaBD(String username_data){
-        String username = username_data;
-        String random_key01 = String.valueOf(username.charAt(0) + username.charAt(1) + username.charAt(4) + username.charAt(3));
-        String random_key02 = random_key01 + new StringBuilder(random_key01).reverse().toString();
-        String random_key03 = new StringBuilder(random_key02).reverse().toString() + username.charAt(2);
-        String random_key = random_key01 + random_key03 + random_key02;
-        
-        if (random_key.contains("ñ")){
-            random_key = random_key.replace("ñ", "n");
-        }
-        if (random_key.length() > 16){
-            for (int i = random_key.length(); i == 0; i++) {
-                if (random_key.length() > 16){
-                    random_key = random_key.substring(random_key.indexOf(i));
-                }
-                else{
-                    break;
-                }
-            }
-        }
-        if (random_key.length() < 16){
-            Random random = new Random();
-            String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-            random_key = random_key + alpha.charAt(random.nextInt(alpha.length()));
-        }
-        return random_key;
     }
     
     public static void main(String args[]) {
@@ -573,6 +563,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -588,6 +579,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
     private javax.swing.JTextField txtAppaterno;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDireccionNumero;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRut;
