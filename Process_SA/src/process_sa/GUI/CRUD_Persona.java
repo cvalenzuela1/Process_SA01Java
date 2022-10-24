@@ -321,7 +321,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Debe llenar todos los campos requeridos");
             }
             else{
-                if (!(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", persona.getEmail()))){
+                if (!(Pattern.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", persona.getEmail()))){
                     JOptionPane.showMessageDialog(this, "Por favor, ingresa un email válido", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else{
