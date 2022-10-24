@@ -192,43 +192,6 @@ public class Controlador {
         return listaPersonas;
     }
     
-    public List<Permiso> getPermisos(){
-        //cs = conn.prepareCall("{call PD_DELETE_USUARIO()}");
-        final List<Permiso> listaPermisos = new ArrayList<>();
-        try {
-            CallableStatement cs = conn.prepareCall("{call PD_SELECT_PERMISOS(?,?,?)}");
-            cs.registerOutParameter(1, OracleTypes.VARCHAR);
-            cs.registerOutParameter(2, OracleTypes.VARCHAR);
-            cs.registerOutParameter(3, OracleTypes.VARCHAR);
-            
-            cs.executeUpdate();
-            
-            String id = cs.getString(1);
-            String tipo_permiso = cs.getString(2);
-            String descripcion = cs.getString(3);
-            
-            if (id != null && tipo_permiso != null && descripcion != null){
-                final String[] arrayID = id.split(":");
-                final String[] arrayTipo_permiso = tipo_permiso.split(":");
-                final String[] arrayDescripcion = descripcion.split(":");
-                if (null != arrayID && arrayID.length > 0) {
-                    Permiso oPermiso;
-                    for (int i = 0; i < arrayID.length; i++) {
-                        oPermiso = new Permiso();
-                        oPermiso.setId(Integer.parseInt(arrayID[i]));
-                        oPermiso.setTipo_permiso(arrayTipo_permiso[i]);
-                        oPermiso.setDescripcion(arrayDescripcion[i]);
-
-                        listaPermisos.add(oPermiso);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println("ERROR conexión: "+e);
-        }
-        return listaPermisos;
-    }
-    
     public String getRolUsuario(int rol_id){
         try {
             CallableStatement cs = conn.prepareCall("{CALL PD_GET_ROL_NOMBRE(?,?)}");
