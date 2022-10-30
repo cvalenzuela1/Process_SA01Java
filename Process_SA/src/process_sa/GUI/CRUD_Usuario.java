@@ -6,13 +6,14 @@
 package process_sa.GUI;
 
 import java.awt.event.KeyEvent;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import process_sa.controller.Controlador;
 import process_sa.controller.Md5hash;
-import process_sa.models.Permiso;
 import process_sa.models.Persona;
 import process_sa.models.Usuario;
 
@@ -370,11 +371,25 @@ public class CRUD_Usuario extends javax.swing.JFrame {
                 String cipheredPassword = md.bytesToHex(md5InBytes);
                 
                 System.out.println("Bytes to hex: "+cipheredPassword);
-
-                String sentencia = String.format("call PD_INSERT_USUARIO('%s', '%s', %s, %s)", user.getNombre_usuario(), cipheredPassword, user.getId_rol(), user.getId_persona());
-                System.out.println("Sentencia: "+sentencia);
-                conn.ejecutarProcedimientoAlmacenado(sentencia);
-                JOptionPane.showMessageDialog(this, "Usuario creado correctamente!");
+                boolean existe_usuario = conn.usuarioExiste(user.getNombre_usuario());
+                if (!existe_usuario){
+                    String sentencia = String.format("call PD_INSERT_USUARIO('%s', '%s', %s, %s)", user.getNombre_usuario(), cipheredPassword, user.getId_rol(), user.getId_persona());
+                    System.out.println("Sentencia: "+sentencia);
+                    conn.ejecutarProcedimientoAlmacenado(sentencia);
+                    //Crear un responsable dependiendo del rol que se elija; si es gerente o funcionario pasa a ser responsable.
+                    if (user.getId_rol() == 2 || user.getId_rol() == 4) {
+                        boolean existe_responsable = conn.responsableExiste(user.getId_persona());
+                        if (!existe_responsable){
+                            String current_date = getCurrentDate();
+                            sentencia = String.format("call PD_INSERT_RESPONSABLE(%s,'%s')", user.getId_persona(), current_date);
+                            System.out.println("Sentencia: "+sentencia);
+                            conn.ejecutarProcedimientoAlmacenado(sentencia);
+                        }
+                    }
+                    JOptionPane.showMessageDialog(this, "Usuario creado correctamente!");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Nombre de usuario ya existe!");
+                }
             }
             else{
                 JOptionPane.showMessageDialog(this, "Nombre de usuario debe tener al menos 5 caracteres...");
@@ -389,6 +404,12 @@ public class CRUD_Usuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCrearActionPerformed
 
+    public String getCurrentDate(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");  
+        LocalDateTime now = LocalDateTime.now();  
+        return dtf.format(now);
+    }
+    
     private void crudUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudUsuarioActionPerformed
         // TODO add your handling code here:
         this.dispose();

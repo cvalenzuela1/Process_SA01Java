@@ -6,6 +6,7 @@
 package process_sa.controller;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import oracle.jdbc.OracleTypes;
-import process_sa.models.Permiso;
 import process_sa.models.Persona;
 import process_sa.models.Usuario;
 
@@ -56,6 +56,40 @@ public class Controlador {
         } catch (SQLException e) {
             System.out.println("ERROR conexión: "+e);
             return null;
+        }
+    }
+    
+    public boolean responsableExiste(int persona_id) throws SQLException{
+        PreparedStatement ps;
+        String sentencia = String.format("SELECT persona_id_persona FROM RESPONSABLE WHERE persona_id_persona = %s", persona_id);
+        ps = conn.prepareStatement(sentencia);
+        ResultSet rs = ps.executeQuery();
+        int id_persona = 0;
+        while (rs.next()){
+            id_persona = rs.getInt("persona_id_persona");
+        }
+        if (id_persona > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public boolean usuarioExiste(String usuario) throws SQLException{
+        PreparedStatement ps;
+        String sentencia = String.format("SELECT id_usuario FROM USUARIO WHERE nombre_usuario = '%s'", usuario);
+        ps = conn.prepareStatement(sentencia);
+        ResultSet rs = ps.executeQuery();
+        int id_usuario = 0;
+        while (rs.next()){
+            id_usuario = rs.getInt("id_usuario");
+        }
+        if (id_usuario > 0){
+            return true;
+        }
+        else{
+            return false;
         }
     }
     
