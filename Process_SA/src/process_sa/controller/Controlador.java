@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import oracle.jdbc.OracleTypes;
+import process_sa.models.Departamento;
+import process_sa.models.Gerencia;
 import process_sa.models.Persona;
 import process_sa.models.Usuario;
 
@@ -56,6 +58,28 @@ public class Controlador {
         } catch (SQLException e) {
             System.out.println("ERROR conexión: "+e);
             return null;
+        }
+    }
+    
+    public int insertarGerenciaReturnIdGerencia(Gerencia ger){
+        try {
+            CallableStatement cs = conn.prepareCall("{CALL PD_INSERT_GERENCIA(?,?)}");
+            cs.registerOutParameter(2, OracleTypes.NUMBER);
+            cs.setString(1, ger.getGerencia());
+            
+            cs.executeUpdate();
+            
+            if (cs.getInt(2) > 0){
+                int gerencia_id = cs.getInt(2);
+                return gerencia_id;
+            }
+            else {
+                return 0;
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("ERROR conexión: "+e);
+            return 0;
         }
     }
     
@@ -224,6 +248,39 @@ public class Controlador {
             System.out.println("ERROR conexión: "+e);
         }
         return listaPersonas;
+    }
+    
+    public List<Departamento> getDepartamento(){
+        //cs = conn.prepareCall("{call PD_DELETE_USUARIO()}");
+        final List<Departamento> listaDepartamento = new ArrayList<>();
+        try {
+            CallableStatement cs = conn.prepareCall("{call PD_SELECT_DEPARTAMENTOS(?,?)}");
+            cs.registerOutParameter(1, OracleTypes.VARCHAR);
+            cs.registerOutParameter(2, OracleTypes.VARCHAR);
+            
+            cs.executeUpdate();
+            
+            String id = cs.getString(1);
+            String departamento = cs.getString(2);
+            
+            if (id != null && departamento != null){
+                final String[] arrayID = id.split(",");
+                final String[] arrayDepartamento = departamento.split(",");
+                if (null != arrayID && arrayID.length > 0) {
+                    Departamento depto;
+                    for (int i = 0; i < arrayID.length; i++) {
+                        depto = new Departamento();
+                        depto.setId_departamento(Integer.parseInt(arrayID[i]));
+                        depto.setDepartamento(arrayDepartamento[i]);
+                        
+                        listaDepartamento.add(depto);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR conexión: "+e);
+        }
+        return listaDepartamento;
     }
     
     public String getRolUsuario(int rol_id){

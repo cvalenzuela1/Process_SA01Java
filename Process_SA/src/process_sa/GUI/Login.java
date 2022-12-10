@@ -80,7 +80,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnBorrar.setText("Borrar");
+        btnBorrar.setText("Limpiar");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);

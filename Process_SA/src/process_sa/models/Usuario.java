@@ -15,6 +15,15 @@ public class Usuario {
     String contraseña;
     int id_rol;
     int id_persona;
+    int id_departamento;
+
+    public int getId_departamento() {
+        return id_departamento;
+    }
+
+    public void setId_departamento(int id_departamento) {
+        this.id_departamento = id_departamento;
+    }
 
     public int getId() {
         return id;

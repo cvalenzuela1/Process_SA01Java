@@ -65,6 +65,7 @@ public class Menu extends javax.swing.JFrame {
         panelFondo = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarioRol = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
         MenuBar = new javax.swing.JMenuBar();
         mainMenu = new javax.swing.JMenu();
         menuInicio = new javax.swing.JMenuItem();
@@ -75,6 +76,9 @@ public class Menu extends javax.swing.JFrame {
         crudRol = new javax.swing.JMenuItem();
         personaMenu = new javax.swing.JMenu();
         crudPersona = new javax.swing.JMenuItem();
+        unidadInternaMenu = new javax.swing.JMenu();
+        crudDepartamento = new javax.swing.JMenuItem();
+        crudGerencia = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -95,6 +99,11 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblUsuarioRol);
 
         panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 370, 190));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Usuarios creados");
+        jLabel5.setAlignmentX(0.5F);
+        panelFondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 110, 30));
 
         getContentPane().add(panelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 280));
 
@@ -154,6 +163,26 @@ public class Menu extends javax.swing.JFrame {
 
         MenuBar.add(personaMenu);
 
+        unidadInternaMenu.setText("Unidad interna");
+
+        crudDepartamento.setText("CRUD Departamento");
+        crudDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crudDepartamentoActionPerformed(evt);
+            }
+        });
+        unidadInternaMenu.add(crudDepartamento);
+
+        crudGerencia.setText("CRUD Gerencia");
+        crudGerencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crudGerenciaActionPerformed(evt);
+            }
+        });
+        unidadInternaMenu.add(crudGerencia);
+
+        MenuBar.add(unidadInternaMenu);
+
         setJMenuBar(MenuBar);
 
         pack();
@@ -195,6 +224,20 @@ public class Menu extends javax.swing.JFrame {
         lg.setVisible(true);
         JOptionPane.showMessageDialog(this, "Has cerrado sesión");
     }//GEN-LAST:event_logoutActionPerformed
+
+    private void crudDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudDepartamentoActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        CRUD_Departamento dep = new CRUD_Departamento();
+        dep.setVisible(true);
+    }//GEN-LAST:event_crudDepartamentoActionPerformed
+
+    private void crudGerenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudGerenciaActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        CRUD_Gerencia ger = new CRUD_Gerencia();
+        ger.setVisible(true);
+    }//GEN-LAST:event_crudGerenciaActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -230,9 +273,12 @@ public class Menu extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar MenuBar;
+    private javax.swing.JMenuItem crudDepartamento;
+    private javax.swing.JMenuItem crudGerencia;
     private javax.swing.JMenuItem crudPersona;
     private javax.swing.JMenuItem crudRol;
     private javax.swing.JMenuItem crudUsuario;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem logout;
     private javax.swing.JMenu mainMenu;
@@ -241,6 +287,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu personaMenu;
     private javax.swing.JMenu rolMenu;
     private javax.swing.JTable tblUsuarioRol;
+    private javax.swing.JMenu unidadInternaMenu;
     private javax.swing.JMenu usuarioMenu;
     // End of variables declaration//GEN-END:variables
 }

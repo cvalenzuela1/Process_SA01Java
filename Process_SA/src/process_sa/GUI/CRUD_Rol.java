@@ -55,8 +55,6 @@ public class CRUD_Rol extends javax.swing.JFrame {
         lblId = new javax.swing.JLabel();
         txtRol = new javax.swing.JTextField();
         btnCrear = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -71,12 +69,16 @@ public class CRUD_Rol extends javax.swing.JFrame {
         crudRol = new javax.swing.JMenuItem();
         personaMenu = new javax.swing.JMenu();
         crudPersona = new javax.swing.JMenuItem();
+        unidadInternaMenu = new javax.swing.JMenu();
+        crudDepartamento = new javax.swing.JMenuItem();
+        crudGerencia = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtId.setEditable(false);
         txtId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIdKeyTyped(evt);
@@ -94,10 +96,6 @@ public class CRUD_Rol extends javax.swing.JFrame {
             }
         });
 
-        btnEditar.setText("Editar");
-
-        btnEliminar.setText("Eliminar");
-
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,27 +108,21 @@ public class CRUD_Rol extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(54, 54, 54)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblUsuario)
                             .addComponent(lblId))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtRol, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,14 +138,13 @@ public class CRUD_Rol extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear)
-                    .addComponent(btnEditar)
-                    .addComponent(btnEliminar)
                     .addComponent(btnLimpiar))
                 .addContainerGap())
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 340, 140));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("CRUD Rol");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
@@ -229,6 +220,26 @@ public class CRUD_Rol extends javax.swing.JFrame {
         personaMenu.add(crudPersona);
 
         jMenuBar1.add(personaMenu);
+
+        unidadInternaMenu.setText("Unidad interna");
+
+        crudDepartamento.setText("CRUD Departamento");
+        crudDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crudDepartamentoActionPerformed(evt);
+            }
+        });
+        unidadInternaMenu.add(crudDepartamento);
+
+        crudGerencia.setText("CRUD Gerencia");
+        crudGerencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crudGerenciaActionPerformed(evt);
+            }
+        });
+        unidadInternaMenu.add(crudGerencia);
+
+        jMenuBar1.add(unidadInternaMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -318,6 +329,20 @@ public class CRUD_Rol extends javax.swing.JFrame {
         lg.setVisible(true);
         JOptionPane.showMessageDialog(this, "Has cerrado sesión");
     }//GEN-LAST:event_logoutActionPerformed
+
+    private void crudDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudDepartamentoActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        CRUD_Departamento dep = new CRUD_Departamento();
+        dep.setVisible(true);
+    }//GEN-LAST:event_crudDepartamentoActionPerformed
+
+    private void crudGerenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudGerenciaActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        CRUD_Gerencia ger = new CRUD_Gerencia();
+        ger.setVisible(true);
+    }//GEN-LAST:event_crudGerenciaActionPerformed
    
     public Rol recuperarDatosGUI(){
         Rol rol = new Rol();
@@ -387,9 +412,9 @@ public class CRUD_Rol extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JMenuItem crudDepartamento;
+    private javax.swing.JMenuItem crudGerencia;
     private javax.swing.JMenuItem crudPersona;
     private javax.swing.JMenuItem crudRol;
     private javax.swing.JMenuItem crudUsuario;
@@ -408,6 +433,7 @@ public class CRUD_Rol extends javax.swing.JFrame {
     private javax.swing.JTable tblRoles;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtRol;
+    private javax.swing.JMenu unidadInternaMenu;
     private javax.swing.JMenu usuarioMenu;
     // End of variables declaration//GEN-END:variables
 }

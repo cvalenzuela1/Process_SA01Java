@@ -50,8 +50,6 @@ public class CRUD_Persona extends javax.swing.JFrame {
         lblId = new javax.swing.JLabel();
         txtRut = new javax.swing.JTextField();
         btnCrear = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -82,6 +80,9 @@ public class CRUD_Persona extends javax.swing.JFrame {
         crudRol = new javax.swing.JMenuItem();
         personaMenu = new javax.swing.JMenu();
         crudPersona = new javax.swing.JMenuItem();
+        unidadInternaMenu = new javax.swing.JMenu();
+        crudDepartamento = new javax.swing.JMenuItem();
+        crudGerencia = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,6 +91,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
 
         jPanel2.setLayout(null);
 
+        txtId.setEditable(false);
         txtId.setMinimumSize(new java.awt.Dimension(7, 25));
         txtId.setPreferredSize(new java.awt.Dimension(7, 27));
         txtId.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -128,15 +130,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnCrear);
-        btnCrear.setBounds(10, 360, 79, 23);
-
-        btnEditar.setText("Editar");
-        jPanel2.add(btnEditar);
-        btnEditar.setBounds(110, 360, 79, 23);
-
-        btnEliminar.setText("Eliminar");
-        jPanel2.add(btnEliminar);
-        btnEliminar.setBounds(200, 360, 79, 23);
+        btnCrear.setBounds(100, 350, 79, 30);
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +139,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnLimpiar);
-        btnLimpiar.setBounds(300, 360, 77, 23);
+        btnLimpiar.setBounds(200, 350, 77, 30);
 
         jLabel1.setText("Apellido paterno:");
         jPanel2.add(jLabel1);
@@ -228,12 +222,13 @@ public class CRUD_Persona extends javax.swing.JFrame {
         jPanel2.add(jLabel9);
         jLabel9.setBounds(60, 180, 50, 14);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 380, 420));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 380, 400));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("CRUD Persona");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 460));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 440));
 
         mainMenu.setText("Menú");
 
@@ -290,6 +285,26 @@ public class CRUD_Persona extends javax.swing.JFrame {
         personaMenu.add(crudPersona);
 
         jMenuBar1.add(personaMenu);
+
+        unidadInternaMenu.setText("Unidad interna");
+
+        crudDepartamento.setText("CRUD Departamento");
+        crudDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crudDepartamentoActionPerformed(evt);
+            }
+        });
+        unidadInternaMenu.add(crudDepartamento);
+
+        crudGerencia.setText("CRUD Gerencia");
+        crudGerencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crudGerenciaActionPerformed(evt);
+            }
+        });
+        unidadInternaMenu.add(crudGerencia);
+
+        jMenuBar1.add(unidadInternaMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -402,6 +417,20 @@ public class CRUD_Persona extends javax.swing.JFrame {
         lg.setVisible(true);
         JOptionPane.showMessageDialog(this, "Has cerrado sesión");
     }//GEN-LAST:event_logoutActionPerformed
+
+    private void crudDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudDepartamentoActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        CRUD_Departamento dep = new CRUD_Departamento();
+        dep.setVisible(true);
+    }//GEN-LAST:event_crudDepartamentoActionPerformed
+
+    private void crudGerenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudGerenciaActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        CRUD_Gerencia ger = new CRUD_Gerencia();
+        ger.setVisible(true);
+    }//GEN-LAST:event_crudGerenciaActionPerformed
    
     public void llenarComboBoxRegion(){
         Controlador conn = new Controlador();
@@ -545,13 +574,13 @@ public class CRUD_Persona extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<String> cboxCiudad;
     private javax.swing.JComboBox<String> cboxComuna;
     private javax.swing.JComboBox<String> cboxDigito;
     private javax.swing.JComboBox<String> cboxRegion;
+    private javax.swing.JMenuItem crudDepartamento;
+    private javax.swing.JMenuItem crudGerencia;
     private javax.swing.JMenuItem crudPersona;
     private javax.swing.JMenuItem crudRol;
     private javax.swing.JMenuItem crudUsuario;
@@ -583,6 +612,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRut;
+    private javax.swing.JMenu unidadInternaMenu;
     private javax.swing.JMenu usuarioMenu;
     // End of variables declaration//GEN-END:variables
 }
