@@ -5,7 +5,6 @@
  */
 package process_sa.GUI;
 import java.awt.event.KeyEvent;
-import java.util.Random;
 import process_sa.controller.Controlador;
 import process_sa.models.Usuario;
 import javax.swing.JOptionPane;

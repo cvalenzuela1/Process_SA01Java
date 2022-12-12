@@ -6,16 +6,9 @@
 package process_sa.GUI;
 
 import java.awt.event.KeyEvent;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import process_sa.controller.Controlador;
-import process_sa.controller.Md5hash;
-import process_sa.models.Persona;
-import process_sa.models.Usuario;
 import process_sa.models.Departamento;
 
 /**
