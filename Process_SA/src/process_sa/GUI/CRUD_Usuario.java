@@ -104,7 +104,6 @@ public class CRUD_Usuario extends javax.swing.JFrame {
         unidadInternaMenu = new javax.swing.JMenu();
         crudDepartamento = new javax.swing.JMenuItem();
         crudGerencia = new javax.swing.JMenuItem();
-        crudSubGerencia = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -409,9 +408,6 @@ public class CRUD_Usuario extends javax.swing.JFrame {
             }
         });
         unidadInternaMenu.add(crudGerencia);
-
-        crudSubGerencia.setText("CRUD Subgerencia");
-        unidadInternaMenu.add(crudSubGerencia);
 
         jMenuBar1.add(unidadInternaMenu);
 
@@ -741,7 +737,6 @@ public class CRUD_Usuario extends javax.swing.JFrame {
     private javax.swing.JMenuItem crudGerencia;
     private javax.swing.JMenuItem crudPersona;
     private javax.swing.JMenuItem crudRol;
-    private javax.swing.JMenuItem crudSubGerencia;
     private javax.swing.JMenuItem crudUsuario;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
