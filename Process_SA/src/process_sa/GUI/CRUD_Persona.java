@@ -331,8 +331,8 @@ public class CRUD_Persona extends javax.swing.JFrame {
         Persona persona = recuperarDatosGUI();
         
         try {
-            if (persona.getRut().length() == 0 || persona.getNombre().length() == 0 || persona.getApellido_paterno().length() == 0 || persona.getApellido_materno().length() == 0
-                    || persona.getId_region() == 0 || persona.getId_direccion() == 0 || persona.getId_ciudad() == 0 || persona.getId_comuna() == 0 || persona.getEmail().length() == 0){
+            if (persona.getRut() == null || persona.getNombre() == null || persona.getApellido_paterno() == null || persona.getApellido_materno() == null
+                    || persona.getId_region() == 0 || persona.getId_direccion() == 0 || persona.getId_ciudad() == 0 || persona.getId_comuna() == 0 || persona.getEmail() == null){
                 JOptionPane.showMessageDialog(this, "Debe llenar todos los campos requeridos");
             }
             else{
@@ -486,11 +486,36 @@ public class CRUD_Persona extends javax.swing.JFrame {
         else{
             persona.setId(0);
         }
-        persona.setRut(txtRut.getText()+"-"+cboxDigito.getSelectedItem());
-        persona.setNombre(txtNombre.getText());   
-        persona.setApellido_paterno(txtAppaterno.getText());
-        persona.setApellido_materno(txtApmaterno.getText());
-        persona.setEmail(txtEmail.getText());
+        if (txtRut.getText().length() > 0){
+            persona.setRut(txtRut.getText()+"-"+cboxDigito.getSelectedItem());
+        }
+        else{
+            persona.setRut(null);
+        }
+        if (txtNombre.getText().length() > 0){
+            persona.setNombre(txtNombre.getText());   
+        }
+        else{
+            persona.setNombre(null);
+        }
+        if (txtAppaterno.getText().length() > 0){
+            persona.setApellido_paterno(txtAppaterno.getText());
+        }
+        else{
+            persona.setApellido_paterno(null);
+        }
+        if (txtApmaterno.getText().length() > 0){
+            persona.setApellido_materno(txtApmaterno.getText());
+        }
+        else{
+            persona.setApellido_materno(null);
+        }
+        if (txtEmail.getText().length() > 0){
+            persona.setEmail(txtEmail.getText());
+        }
+        else{
+            persona.setEmail(null);
+        }
         if (cboxComuna.getSelectedIndex() > 0){
             persona.setId_direccion(getDireccionId(txtDireccion.getText(), txtDireccionNumero.getText(), Integer.parseInt(String.valueOf(cboxComuna.getSelectedItem().toString().charAt(0)))));
             persona.setId_comuna(Integer.parseInt(String.valueOf(cboxComuna.getSelectedItem().toString().charAt(0))));
