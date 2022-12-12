@@ -16,11 +16,21 @@ public class Persona {
     String apellido_paterno;
     String apellido_materno;
     String email;
+    String direccion;
     int id_direccion;
     int id_region;
     int id_ciudad;
     int id_comuna;
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    
+    
     public String getEmail() {
         return email;
     }

@@ -516,6 +516,12 @@ public class CRUD_Persona extends javax.swing.JFrame {
         else{
             persona.setEmail(null);
         }
+        if (txtDireccion.getText().length() > 0) {
+            persona.setDireccion(txtDireccion.getText());
+        }
+        else {
+            persona.setDireccion(null);
+        }
         if (cboxComuna.getSelectedIndex() > 0){
             persona.setId_direccion(getDireccionId(txtDireccion.getText(), txtDireccionNumero.getText(), Integer.parseInt(String.valueOf(cboxComuna.getSelectedItem().toString().charAt(0)))));
             persona.setId_comuna(Integer.parseInt(String.valueOf(cboxComuna.getSelectedItem().toString().charAt(0))));
