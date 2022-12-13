@@ -309,7 +309,7 @@ public class CRUD_Persona extends javax.swing.JFrame {
         
         try {
             if (persona.getRut() == null || persona.getNombre() == null || persona.getApellido_paterno() == null || persona.getApellido_materno() == null
-                    || persona.getId_region() == 0 || persona.getId_direccion() == 0 || persona.getId_ciudad() == 0 || persona.getId_comuna() == 0 || persona.getEmail() == null){
+                   || persona.getId_direccion() == 0 || persona.getId_comuna() == 0 || persona.getEmail() == null){
                 JOptionPane.showMessageDialog(this, "Debe llenar todos los campos requeridos");
             }
             else{
